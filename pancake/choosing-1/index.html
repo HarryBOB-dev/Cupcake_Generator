@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cupcake Generator</title>
+  <style>
+    body{
+      background-color: pink;
+    }
+    #Flavour{
+      position: absolute;
+      transform: translate(-50%, -50%);
+      color: #333333;
+      left:50%;
+      top:30%;
+      font-size: 500%;
+      text-align: center;
+      width: 70%;
+    }
+    #select_flav{
+      width: 40%;
+      height: 60%;
+      font-size: 100%;
+      color: #333333;
+      background-color: lightgrey;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      left:50%;
+      top: 150%;
+    }
+    #continue{
+      width: 25%;
+      transform: translate(-50%, -50%);
+      position: absolute;
+      top:270%;
+      text-align: center;
+      left:50%;
+      background-color: grey;
+      color:#333333;
+      border-radius: 30px;
+      text-decoration: none;
+      transition-duration: 0.4s;
+      width:20%;
+      font-size: 90%;
+    }
+
+    #continue:hover{
+      border-radius: 60px;
+      color: lightgrey;
+    }
+    
+  </style>
+</head>
+<body>
+  <h1 id = "Flavour">Choose your flavour of the cupcake</p>
+  <select id = "select_flav">
+    <option value="vanilla">Vanilla</option>
+    <option value="chocolate">Chocolate</option>
+    <option value="banana">Banana</option>
+    <option value="strawberry">Strawberry</option>
+    <option value="lemon">Lemon</option>
+  </select>
+  <a href="../choosing-2/" onclick="submit()" id = "continue" >Continue</a>
+  <script>
+    function submit(){
+      const flavour = document.getElementById("select_flav").value;
+      sessionStorage.setItem("Flavour",flavour);
+
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cupcake Generator</title>
+  <style>
+    body{
+      background-color: pink;
+    }
+    #title{
+      transform: translate(-50%, -50%);
+      position: absolute;
+      color: #333333;
+      left:50%;
+      font-size: 500%;
+      top:20%;
+    }
+    #Sprinkles{
+      transform: translate(-50%, -50%);
+      height:5%;
+      width: 5%;
+      top:35%;
+      left:35%;
+      position: absolute;
+    }
+    #Fruits{
+      transform: translate(-50%, -50%);
+      height:5%;
+      width: 5%;
+      top:45%;
+      left:35%;
+      position: absolute;
+    }
+    #Choc_chip{
+      transform: translate(-50%, -50%);
+      height:5%;
+      width: 5%;
+      top:55%;
+      left:35%;
+      position: absolute;
+    }
+    #Nuts{
+      transform: translate(-50%, -50%);
+      height:5%;
+      width: 5%;
+      top:65%;
+      left:35%;
+      position: absolute;
+    }
+    #Sprinkles_lab{
+      transform: translate(-50%, -50%);
+      color:#333333;
+      position: absolute;
+      top:35%;
+      left:50%;
+      font-size: 500%;
+    }
+    #Fruits_lab{
+      transform: translate(-50%, -50%);
+      color:#333333;
+      position: absolute;
+      top:45%;
+      left:50%;
+      font-size: 500%;
+    }
+    #Choc_chip_lab{
+      transform: translate(-50%, -50%);
+      color:#333333;
+      position: absolute;
+      top:55%;
+      left:50%;
+      font-size: 500%;
+    }
+    #Nuts_lab{
+      transform: translate(-50%, -50%);
+      color:#333333;
+      position: absolute;
+      top:65%;
+      left:50%;
+      font-size: 500%;
+    }
+    #continue{
+      width: 25%;
+      transform: translate(-50%, -50%);
+      position: absolute;
+      top:80%;
+      text-align: center;
+      left:50%;
+      background-color: grey;
+      color:#333333;
+      border-radius: 30px;
+      text-decoration: none;
+      transition-duration: 0.4s;
+      width:20%;
+      font-size: 90%;
+      height: 7%;
+      font-size: 400%;
+    }
+    #continue:hover{
+      border-radius: 60px;
+      color: lightgrey;
+    }
+  </style>
+  <script>
+    function submit_3(){
+      const selectedFrostings = [];
+      const checkboxes = document.querySelectorAll('input[name="frosting"]:checked');
+    
+      checkboxes.forEach((checkbox) => {
+          selectedFrostings.push(checkbox.value);
+      });
+      const toppingsString = selectedFrostings.join(",");
+    
+      // Store the toppings string in session storage
+      sessionStorage.setItem("Toppings", toppingsString);
+      
+    }
+  </script>
+</head>
+<body>
+  <h1 id = "title">
+    Select the toppings
+  </h1>
+  <input type="checkbox" id="Sprinkles" name="frosting" value="sprinkes">
+  <input type="checkbox" id="Fruits" name="frosting" value="fruits">
+  <input type="checkbox" id="Choc_chip" name="frosting" value="chocolate_chips">
+  <input type="checkbox" id="Nuts" name="frosting" value="nuts">
+  <label id="Sprinkles_lab">Sprinkles</label>
+  <label id="Fruits_lab">Fruits</label>
+  <label id="Choc_chip_lab">Chocolate Chips</label>
+  <label id="Nuts_lab">Nuts</label>
+  <a href="../generate/" onclick="submit_3()" id = "continue" >Generate!</a>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cupcake Generator</title>
+  <style>
+    body{
+      background-color: pink;
+    }
+    #title{
+      color: #333333;
+      font-size: 500%;
+      left:50%;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      top:25%;
+    }
+    #select_frost{
+      width: 20%;
+      height: 8%;
+      font-size: 100%;
+      color: #333333;
+      background-color: lightgrey;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      border-radius: 10px;
+      font-size: 400%;
+      left:50%;
+      top: 43%;
+    }
+    #continue{
+      width: 25%;
+      transform: translate(-50%, -50%);
+      position: absolute;
+      top:60%;
+      text-align: center;
+      left:50%;
+      background-color: grey;
+      color:#333333;
+      border-radius: 30px;
+      text-decoration: none;
+      transition-duration: 0.4s;
+      width:20%;
+      font-size: 90%;
+      height: 7%;
+      font-size: 400%;
+    }
+
+    #continue:hover{
+      border-radius: 60px;
+      color: lightgrey;
+    }
+  </style>
+  <!-- <script>
+    window.onload = function(){
+      const flavour = sessionStorage.getItem("Flavour");
+      if(flavour){
+        document.getElementById("test").textContent = `${flavour}`;
+      }else{
+        document.getElementById("test").textContent = "error";
+      }
+    }
+  </script> -->
+  <script>
+    function submit_2(){
+      const frost = document.getElementById("select_frost").value;
+      sessionStorage.setItem("Frosting",frost);
+
+    }
+  </script>
+</head>
+<body>
+  <!-- <p id="test"></p>
+   -->
+  <h1 id = "title">
+    Select the frosting
+  </h1>
+  <select id = "select_frost">
+    <option value="buttercream">Butter Cream</option>
+    <option value="creamcheese">Cream Cheese</option>
+    <option value="whippedcream">Whipped Cream</option>
+  </select>
+  <a href="../choosing-3/" onclick="submit_2()" id = "continue" >Continue</a>
+</body>
+</html>

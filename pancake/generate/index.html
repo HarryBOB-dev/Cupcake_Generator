@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cupcake Generator</title>
+  <style>
+    body{
+      background-color:pink;
+    }
+    #title{
+      transform: translate(-50%, -50%);
+      position: absolute;
+      color: #333333;
+      left:50%;
+      font-size: 500%;
+      top:10%;
+    }
+    canvas {
+      border: 1px solid #000;
+      background: #fff;
+      position: absolute;
+      left:50%;
+      transform: translate(-50%, -50%);
+      top:60%;
+      background-color: pink;
+      border-width: 0px;
+    }
+    #controls {
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1 id = "title">
+    Here is your cupcake
+  </h1>
+  <canvas id="drawingCanvas" width="800" height="600"></canvas>
+  <script>
+    const canvas = document.getElementById('drawingCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Function to automatically draw a square
+    function drawSquare(x, y, size) {
+        ctx.beginPath();
+        ctx.rect(x, y, size, size);
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 5;
+        ctx.stroke();
+        ctx.closePath();
+    }
+    function drawTrapezoid(x, y, topWidth, bottomWidth, height,color) {
+      ctx.beginPath();
+      ctx.moveTo(x, y); // Top-left
+      ctx.lineTo(x + topWidth, y); // Top-right
+      ctx.lineTo(x + bottomWidth, y + height); // Bottom-right
+      ctx.lineTo(x, y + height); // Bottom-left
+      ctx.closePath(); // Connect back to the starting point
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 5;
+      ctx.stroke();
+    }    
+    function drawCupcake(x, y,color) {
+            // Draw the cupcake base
+            ctx.fillStyle = '#D2691E'; // Brown color for the base
+            //ctx.fillRect(x, y, 50, 50); // Base of the cupcake
+            ctx.beginPath();
+            ctx.moveTo(x,y);
+            ctx.lineTo(x+250,y);
+            ctx.lineTo(x+100,y+100);
+            ctx.lineTo(x,y+100);
+            ctx.lineTo(x-150,y);
+            ctx.fill();
+
+            // Draw the frosting
+            ctx.fillStyle = color; // Light pink color for frosting
+            ctx.beginPath();
+           // ctx.moveTo(x-100,y-100);
+            ctx.arc(x + 50, y-100, 170, Math.PI, 0); // Frosting top
+            ctx.lineTo(x + 230, y); // Right side of frosting
+            ctx.lineTo(x-130, y); // Left side of frosting
+            ctx.closePath();
+            ctx.fill();
+        }
+    function drawFrostings(x,y,color){
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.moveTo(x-100,y-150);
+      ctx.lineTo(x+200,y-150);
+      ctx.lineTo(x+50,y-300);
+      ctx.closePath();
+      ctx.fill();
+
+    }
+    function checkToppings(toppingsString, toppingsToCheck) {
+          // Split the string into an array
+          const toppingsArray = toppingsString.split(',');
+
+          // Check if each topping is present
+          return toppingsToCheck.every(topping => toppingsArray.includes(topping));
+      }
+      function drawSprinkles() {
+        ctx.fillStyle = "red";
+        ctx.beginPath();
+        ctx.moveTo(350,140);
+        ctx.lineTo(310,140);
+        ctx.lineTo(350,120);
+        ctx.lineTo(310,120);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = "blue";
+        ctx.beginPath();
+        ctx.moveTo(380,140);
+        ctx.lineTo(340,140);
+        ctx.lineTo(380,160);
+        ctx.lineTo(340,160);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = "green";
+        ctx.beginPath();
+        ctx.moveTo(310,140);
+        ctx.lineTo(270,140);
+        ctx.lineTo(310,160);
+        ctx.lineTo(270,160);
+        ctx.closePath();
+        ctx.fill();
+      }
+      function drawFruits(){
+        ctx.fillStyle = "red";
+        ctx.beginPath();
+        ctx.moveTo(450,150);
+        ctx.lineTo(450,120);
+        ctx.lineTo(310,120);
+        ctx.lineTo(310,150);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = "yellow";
+        ctx.beginPath();
+        ctx.moveTo(400,200);
+        ctx.lineTo(400,150);
+        ctx.lineTo(360,150);
+        ctx.lineTo(360,200);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = "green";
+        ctx.beginPath();
+        ctx.moveTo(250,200);
+        ctx.lineTo(250,150);
+        ctx.lineTo(300,150);
+        ctx.lineTo(300,200);
+        ctx.closePath();
+        ctx.fill();
+      }
+      function drawNuts(){
+        ctx.fillStyle = "brown";
+        ctx.beginPath();
+        ctx.moveTo(370,150);
+        ctx.lineTo(370,120);
+        ctx.lineTo(310,120);
+        ctx.lineTo(310,150);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = "brown";
+        ctx.beginPath();
+        ctx.moveTo(400,200);
+        ctx.lineTo(400,150);
+        ctx.lineTo(420,150);
+        ctx.lineTo(420,200);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = "brown";
+        ctx.beginPath();
+        ctx.moveTo(260,220);
+        ctx.lineTo(260,170);
+        ctx.lineTo(300,170);
+        ctx.lineTo(300,220);
+        ctx.closePath();
+        ctx.fill();
+      }
+      function drawChoc(){
+        ctx.fillStyle = "brown";
+        ctx.beginPath();
+        ctx.moveTo(450,300);
+        ctx.lineTo(450,200);
+        ctx.lineTo(260,200);
+        ctx.lineTo(260,300);
+        ctx.closePath();
+        ctx.fill();
+        
+      }
+    window.onload = () =>{
+      
+      const flavour = sessionStorage.getItem("Flavour");
+      const Frostings = sessionStorage.getItem("Frosting");
+      const toppings = sessionStorage.getItem("Toppings");
+      //alert(flavour); 
+      if(flavour==="vanilla"){
+        //alert(1);
+        drawCupcake(300, 400, '#F3E5AB');
+      }
+      if(flavour==="chocolate"){
+        //alert(1);
+        drawCupcake(300, 400, '#7B3F00');
+      }if(flavour==="banana"){
+        //alert(1);
+        drawCupcake(300, 400, '#FFE135');
+      }if(flavour==="strawberry"){
+        //alert(1);
+        drawCupcake(300, 400, '#FB2943');
+      }if(flavour==="lemon"){
+        //alert(1);
+        drawCupcake(300, 400, '#EFE726');
+      }
+      //alert(Frostings);
+      if(Frostings==="buttercream"){
+        drawFrostings(300,400,"#fff0ae");
+      }if(Frostings==="creamcheese"){
+        drawFrostings(300,400,"#d9d7a9");
+      }if(Frostings==="whippedcream"){
+        drawFrostings(300,400,"#fffff0");
+      }
+      if(toppings.includes("sprinkes")){
+        //alert(1);
+        drawSprinkles();
+      }if(toppings.includes("fruits")){
+        drawFruits();
+      }if(toppings.includes("chocolate_chips")){
+        drawChoc();
+      }if(toppings.includes("nuts")){
+        drawNuts();
+      }
+      
+    };
+  </script>
+</body>
+</html>
