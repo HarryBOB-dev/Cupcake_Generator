@@ -1,2 +1,2 @@
 # Cupcake_Generator
-Cupcake Generator
+It generates a cupcake that fits your likings!
